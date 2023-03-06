@@ -8,7 +8,7 @@
   },
   "author": "Kite",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ixkaito/astro-relative-links.git"
@@ -26,5 +26,11 @@
     "astro": "^2.0.17",
     "glob": "^9.2.1",
     "typescript": "^4.9.5"
+  },
+  "publishConfig": {
+    "ignore": [
+      "!dist/",
+      "src/"
+    ]
   }
 }
