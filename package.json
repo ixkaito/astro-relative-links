@@ -1,5 +1,6 @@
 {
   "name": "astro-relative-links",
+  "type": "module",
   "version": "0.1.1",
   "description": "Build Astro with reltive links.",
   "scripts": {
@@ -9,6 +10,7 @@
   "author": "Kite",
   "license": "MIT",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ixkaito/astro-relative-links.git"
