@@ -1,9 +1,13 @@
-import type { AstroIntegration } from 'astro';
+import type { AstroIntegration, AstroConfig } from 'astro';
 import { writeFileSync, readFileSync } from 'fs';
 import { globSync } from 'glob';
 import path from 'path';
 
-export default (): AstroIntegration => {
+function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
+  const base = config?.base
+    ? config.base.replace(/^\/*([^\/]+)(.*)([^\/]+)\/*$/, '/$1$2$3')
+    : '/';
+
   return {
     name: 'relative-links',
     hooks: {
@@ -14,13 +18,12 @@ export default (): AstroIntegration => {
           filePaths.forEach((filePath) => {
             const html = readFileSync(filePath, 'utf8');
 
+            const pattern = new RegExp(`(\\s(href|src))="${base}/*`, 'g');
+
             const relativePath =
               path.relative(path.dirname(filePath), dir.pathname) || '.';
 
-            const result = html.replace(
-              /(\s(href|src))="\//g,
-              `$1="${relativePath}/`
-            );
+            const result = html.replace(pattern, `$1="${relativePath}/`);
 
             writeFileSync(filePath, result, 'utf8');
           });
@@ -30,4 +33,18 @@ export default (): AstroIntegration => {
       },
     },
   };
-};
+}
+
+export default function (): AstroIntegration {
+  return {
+    name: 'relative-links',
+    hooks: {
+      'astro:config:setup': ({ config, updateConfig }) => {
+        updateConfig({
+          // Pass the Astro config to the `astro:build:done` hook
+          integrations: [relativeLinks({ config })],
+        });
+      },
+    },
+  };
+}
