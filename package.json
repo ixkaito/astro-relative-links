@@ -1,7 +1,7 @@
 {
   "name": "astro-relative-links",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Build Astro with reltive links.",
   "scripts": {
     "build": "tsc",
