@@ -19,7 +19,11 @@
     "url": "git+https://github.com/ixkaito/astro-relative-links.git"
   },
   "keywords": [
-    "astro-integration"
+    "astro",
+    "withastro",
+    "astro-component",
+    "astro-integration",
+    "renderer"
   ],
   "bugs": {
     "url": "https://github.com/ixkaito/astro-relative-links/issues"
