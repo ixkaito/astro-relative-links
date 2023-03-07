@@ -181,3 +181,7 @@ The above components will be generated as follows.
     Banana
   </a>
   ```
+
+# License
+
+[MIT](https://github.com/ixkaito/astro-relative-links/blob/main/LICENSE)
