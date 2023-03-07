@@ -5,7 +5,8 @@
   "description": "Build Astro with reltive links.",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublish": "npm run build"
   },
   "author": "Kite",
   "license": "MIT",
