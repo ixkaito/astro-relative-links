@@ -2,7 +2,7 @@
   "name": "astro-relative-links",
   "type": "module",
   "version": "0.2.5",
-  "description": "Build Astro with reltive links.",
+  "description": "Build Astro with relative links.",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -23,7 +23,8 @@
     "withastro",
     "astro-component",
     "astro-integration",
-    "renderer"
+    "renderer",
+    "relative-link"
   ],
   "bugs": {
     "url": "https://github.com/ixkaito/astro-relative-links/issues"
