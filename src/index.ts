@@ -30,6 +30,25 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
         } catch (error) {
           console.log(error);
         }
+        
+        try {
+          const filePaths = globSync(`${dir.pathname}**/*.css`);
+
+          filePaths.forEach((filePath) => {
+            const css = readFileSync(filePath, 'utf8');
+
+            const pattern = new RegExp(`url\\(${base}*`, 'g');
+
+            const relativePath =
+              path.relative(path.dirname(filePath), dir.pathname) || '.';
+
+            const result = css.replace(pattern, `url(${relativePath}/`);
+
+            writeFileSync(filePath, result, 'utf8');
+          });
+        } catch (error) {
+          console.log(error);
+        }
       },
     },
   };
