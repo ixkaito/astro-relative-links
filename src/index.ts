@@ -24,8 +24,12 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
               path.relative(path.dirname(filePath), dir.pathname) || '.';
 
             const result = html.replace(pattern, `$1="${relativePath}/`);
+            
+            const pattern2 = new RegExp(`(,\\s)${base}`, 'g');
+            
+            const result2 = result.replace(pattern2, `$1${relativePath}/`);
 
-            writeFileSync(filePath, result, 'utf8');
+            writeFileSync(filePath, result2, 'utf8');
           });
         } catch (error) {
           console.log(error);
