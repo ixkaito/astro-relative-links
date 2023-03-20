@@ -37,7 +37,7 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
           filePaths.forEach((filePath) => {
             const css = readFileSync(filePath, 'utf8');
 
-            const pattern = new RegExp(`url\\(${base}*`, 'g');
+            const pattern = new RegExp(`url\\(${base}/*`, 'g');
 
             const relativePath =
               path.relative(path.dirname(filePath), dir.pathname) || '.';
