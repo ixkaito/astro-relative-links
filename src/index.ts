@@ -25,7 +25,7 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
 
             const result = html.replace(pattern, `$1="${relativePath}/`);
             
-            const pattern2 = new RegExp(`(,\\s)${base}`, 'g');
+            const pattern2 = new RegExp(`(,\\s)${base}/`, 'g');
             
             const result2 = result.replace(pattern2, `$1${relativePath}/`);
 
