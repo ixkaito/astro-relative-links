@@ -13,7 +13,7 @@ test.each([
   ['foo/bar/', '/foo/bar/'],
   ['/foo/bar/', '/foo/bar/'],
   ['//foo/bar//', '/foo/bar/'],
-])('Formatted base', (base, expected) => {
+])('Leading and trailing slashed base', (base, expected) => {
   expect(leadingTrailingSlash(base)).toBe(expected);
 });
 
