@@ -3,74 +3,111 @@ import { writeFileSync, readFileSync } from 'fs';
 import { globSync } from 'glob';
 import path from 'path';
 
-export function formatBase(base?: string) {
+/**
+ * Add leading and trailing slashes to the `base`.
+ *
+ * @param {string} base
+ * @returns {string} - Formatted base.
+ */
+export function leadingTrailingSlash(base?: string) {
   return base?.replace(/^\/*([^\/]+)(.*)([^\/]+)\/*$/, '/$1$2$3/') || '/';
 }
 
-export function replaceHtml({
-  dirName,
+/**
+ * Replace absolute paths in HTML files with relative paths.
+ *
+ * @param {object} options
+ * @param {string} options.outDirPath - The path of the directory that `astro build` writes final build to.
+ * @param {string} options.filePath - The path of the target file.
+ * @param {string} options.base - The base path to deploy to.
+ * @param {string} options.html - The content of the HTML file.
+ * @returns {string} - Replaced HTML
+ */
+export function replaceHTML({
+  outDirPath,
   filePath,
   base,
   html,
 }: {
-  dirName: string;
+  outDirPath: string;
   filePath: string;
   base: string;
   html: string;
 }) {
-  const pattern = new RegExp(`(\\s(href|src)=["'])${base}(?!\/)`, 'g');
+  const pattern = new RegExp(
+    `(?<=\\s(href|src(set)?)=["']([^"']*,)?\\s*?)${base}(?!\/)`,
+    'gm'
+  );
 
-  const relativePath = path.relative(path.dirname(filePath), dirName) || '.';
+  const relativePath = path.relative(path.dirname(filePath), outDirPath) || '.';
 
-  const result = html.replace(pattern, `$1${relativePath}/`);
+  return html.replace(pattern, `${relativePath}/`);
+}
 
-  return result;
+/**
+ * Replace absolute paths in CSS files with relative paths.
+ *
+ * @param {object} options
+ * @param {string} options.outDirPath - The path of the directory that `astro build` writes final build to.
+ * @param {string} options.filePath - The path of the target file.
+ * @param {string} options.base - The base path to deploy to.
+ * @param {string} options.css - The content of the CSS file.
+ * @returns {string} - Replaced CSS
+ */
+export function replaceCSS({
+  outDirPath,
+  filePath,
+  base,
+  css,
+}: {
+  outDirPath: string;
+  filePath: string;
+  base: string;
+  css: string;
+}) {
+  const pattern = new RegExp(`(?<=url\\(\\s*?["']?\\s*?)${base}(?!\/)`, 'gm');
+
+  const relativePath = path.relative(path.dirname(filePath), outDirPath) || '.';
+
+  return css.replace(pattern, `${relativePath}/`);
 }
 
 function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
-  const base = formatBase(config?.base);
+  const base = leadingTrailingSlash(config?.base);
 
   return {
     name: 'relative-links',
     hooks: {
       'astro:build:done': async ({ dir }) => {
+        const outDirPath = dir.pathname;
+
         try {
-          const filePaths = globSync(`${dir.pathname}**/*.html`);
-
-          filePaths.forEach((filePath) => {
-            const html = readFileSync(filePath, 'utf8');
-
-            const pattern = new RegExp(`(\\s(href|src))="${base}/*`, 'g');
-
-            const relativePath =
-              path.relative(path.dirname(filePath), dir.pathname) || '.';
-
-            const result = html.replace(pattern, `$1="${relativePath}/`);
-
-            const pattern2 = new RegExp(`(,\\s)${base}/`, 'g');
-
-            const result2 = result.replace(pattern2, `$1${relativePath}/`);
-
-            writeFileSync(filePath, result2, 'utf8');
+          // HTML
+          globSync(`${outDirPath}**/*.html`).forEach((filePath) => {
+            writeFileSync(
+              filePath,
+              replaceHTML({
+                outDirPath,
+                filePath,
+                base,
+                html: readFileSync(filePath, 'utf8'),
+              }),
+              'utf8'
+            );
           });
-        } catch (error) {
-          console.log(error);
-        }
 
-        try {
-          const filePaths = globSync(`${dir.pathname}**/*.css`);
-
-          filePaths.forEach((filePath) => {
-            const css = readFileSync(filePath, 'utf8');
-
-            const pattern = new RegExp(`url\\(${base}/*`, 'g');
-
-            const relativePath =
-              path.relative(path.dirname(filePath), dir.pathname) || '.';
-
-            const result = css.replace(pattern, `url(${relativePath}/`);
-
-            writeFileSync(filePath, result, 'utf8');
+          // CSS
+          globSync(`${outDirPath}**/*.css`).forEach((filePath) => {
+            writeFileSync(
+              filePath,
+              replaceCSS({
+                outDirPath,
+                filePath,
+                base,
+                css: readFileSync(filePath, 'utf8'),
+              }),
+              'utf8'
+            );
           });
         } catch (error) {
           console.log(error);
