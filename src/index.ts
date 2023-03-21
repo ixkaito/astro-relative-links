@@ -3,14 +3,32 @@ import { writeFileSync, readFileSync } from 'fs';
 import { globSync } from 'glob';
 import path from 'path';
 
-export function isZero(value: number): boolean {
-  return value === 0;
+export function formatBase(base?: string) {
+  return base?.replace(/^\/*([^\/]+)(.*)([^\/]+)\/*$/, '/$1$2$3/') || '/';
+}
+
+export function replaceHtml({
+  dirName,
+  filePath,
+  base,
+  html,
+}: {
+  dirName: string;
+  filePath: string;
+  base: string;
+  html: string;
+}) {
+  const pattern = new RegExp(`(\\s(href|src)=["'])${base}(?!\/)`, 'g');
+
+  const relativePath = path.relative(path.dirname(filePath), dirName) || '.';
+
+  const result = html.replace(pattern, `$1${relativePath}/`);
+
+  return result;
 }
 
 function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
-  const base = config?.base
-    ? config.base.replace(/^\/*([^\/]+)(.*)([^\/]+)\/*$/, '/$1$2$3')
-    : '/';
+  const base = formatBase(config?.base);
 
   return {
     name: 'relative-links',
@@ -28,9 +46,9 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
               path.relative(path.dirname(filePath), dir.pathname) || '.';
 
             const result = html.replace(pattern, `$1="${relativePath}/`);
-            
+
             const pattern2 = new RegExp(`(,\\s)${base}/`, 'g');
-            
+
             const result2 = result.replace(pattern2, `$1${relativePath}/`);
 
             writeFileSync(filePath, result2, 'utf8');
@@ -38,7 +56,7 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
         } catch (error) {
           console.log(error);
         }
-        
+
         try {
           const filePaths = globSync(`${dir.pathname}**/*.css`);
 
