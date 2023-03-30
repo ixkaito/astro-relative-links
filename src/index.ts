@@ -2,6 +2,7 @@ import type { AstroIntegration, AstroConfig } from 'astro';
 import { writeFileSync, readFileSync } from 'fs';
 import { globSync } from 'glob';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 /**
  * Add leading and trailing slashes to the `base`.
@@ -79,11 +80,12 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
     name: 'relative-links',
     hooks: {
       'astro:build:done': async ({ dir }) => {
-        const outDirPath = dir.pathname;
+        // Use fileURLToPath to get a valid, cross-platform absolute path string
+        const outDirPath = fileURLToPath(dir);
 
         try {
           // HTML
-          globSync(`${outDirPath}**/*.html`).forEach((filePath) => {
+          globSync(`${dir.pathname}**/*.html`).forEach((filePath) => {
             writeFileSync(
               filePath,
               replaceHTML({
@@ -97,7 +99,7 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
           });
 
           // CSS
-          globSync(`${outDirPath}**/*.css`).forEach((filePath) => {
+          globSync(`${dir.pathname}**/*.css`).forEach((filePath) => {
             writeFileSync(
               filePath,
               replaceCSS({
