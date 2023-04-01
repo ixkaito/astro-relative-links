@@ -54,6 +54,10 @@ const html = `<html>
       />
       <img src="./assets/images/foo.jpg" alt="" />
       <img src="assets/images/foo.jpg" alt="" />
+      <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+      <div style="background-image: url('/assets/images/foo.jpg');"></div>
+      <div style="background-image: url(/foo/assets/images/foo.jpg);"></div>
+      <div style="">background-image: url(/assets/images/foo.jpg);</div>
     </html>`;
 
 test.each([
@@ -99,6 +103,10 @@ test.each([
       />
       <img src="./assets/images/foo.jpg" alt="" />
       <img src="assets/images/foo.jpg" alt="" />
+      <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+      <div style="background-image: url('./assets/images/foo.jpg');"></div>
+      <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
+      <div style="">background-image: url(/assets/images/foo.jpg);</div>
     </html>`,
   },
   {
@@ -143,6 +151,10 @@ test.each([
       />
       <img src="./assets/images/foo.jpg" alt="" />
       <img src="assets/images/foo.jpg" alt="" />
+      <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+      <div style="background-image: url('./assets/images/foo.jpg');"></div>
+      <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
+      <div style="">background-image: url(/assets/images/foo.jpg);</div>
     </html>`,
   },
   {
@@ -187,6 +199,10 @@ test.each([
       />
       <img src="./assets/images/foo.jpg" alt="" />
       <img src="assets/images/foo.jpg" alt="" />
+      <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+      <div style="background-image: url('../assets/images/foo.jpg');"></div>
+      <div style="background-image: url(../foo/assets/images/foo.jpg);"></div>
+      <div style="">background-image: url(/assets/images/foo.jpg);</div>
     </html>`,
   },
   {
@@ -231,6 +247,10 @@ test.each([
       />
       <img src="./assets/images/foo.jpg" alt="" />
       <img src="assets/images/foo.jpg" alt="" />
+      <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+      <div style="background-image: url('/assets/images/foo.jpg');"></div>
+      <div style="background-image: url(./assets/images/foo.jpg);"></div>
+      <div style="">background-image: url(/assets/images/foo.jpg);</div>
     </html>`,
   },
   {
@@ -275,6 +295,10 @@ test.each([
       />
       <img src="./assets/images/foo.jpg" alt="" />
       <img src="assets/images/foo.jpg" alt="" />
+      <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+      <div style="background-image: url('/assets/images/foo.jpg');"></div>
+      <div style="background-image: url(./assets/images/foo.jpg);"></div>
+      <div style="">background-image: url(/assets/images/foo.jpg);</div>
     </html>`,
   },
   {
@@ -319,6 +343,10 @@ test.each([
       />
       <img src="./assets/images/foo.jpg" alt="" />
       <img src="assets/images/foo.jpg" alt="" />
+      <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+      <div style="background-image: url('/assets/images/foo.jpg');"></div>
+      <div style="background-image: url(../assets/images/foo.jpg);"></div>
+      <div style="">background-image: url(/assets/images/foo.jpg);</div>
     </html>`,
   },
 ])('Replaced HTML', ({ expected, ...args }) => {

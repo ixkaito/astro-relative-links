@@ -36,7 +36,7 @@ export function replaceHTML({
   html: string;
 }) {
   const pattern = new RegExp(
-    `(?<=\\s(href|src(set)?)=["']([^"']*,)?\\s*?)${base}(?!\/)`,
+    `(?<=<[^>]+\\s((href|src(set)?)=["']([^"']*,)?|style=("[^"]*|'[^']*)url\\(\\s*?["']?)\\s*?)${base}(?!\/)`,
     'gm'
   );
 
