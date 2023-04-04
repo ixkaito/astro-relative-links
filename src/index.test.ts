@@ -35,6 +35,13 @@ const html = `<html>
         /foo/baz/
       ">/foo/baz/</a>
       <a href='/foo/baz/'>/foo/baz/</a>
+      <a href=/foo/baz/>/foo/baz/</a>
+      <a href=/foo/baz/ class=foo>/foo/baz/</a>
+      <a
+        href=/foo/baz/
+      >
+        /foo/baz/
+      </a>
       <a foohref="/foo/baz/">/foo/baz/</a>
       <a href="https://example.com">example</a>
       <a href="//example.com">example</a>
@@ -58,6 +65,7 @@ const html = `<html>
       <div style="background-image: url('/assets/images/foo.jpg');"></div>
       <div style="background-image: url(/foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
+      <div style=background-image:url(/foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
     </html>`;
 
 test.each([
@@ -84,6 +92,13 @@ test.each([
         ./foo/baz/
       ">/foo/baz/</a>
       <a href='./foo/baz/'>/foo/baz/</a>
+      <a href=./foo/baz/>/foo/baz/</a>
+      <a href=./foo/baz/ class=foo>/foo/baz/</a>
+      <a
+        href=./foo/baz/
+      >
+        /foo/baz/
+      </a>
       <a foohref="/foo/baz/">/foo/baz/</a>
       <a href="https://example.com">example</a>
       <a href="//example.com">example</a>
@@ -107,6 +122,7 @@ test.each([
       <div style="background-image: url('./assets/images/foo.jpg');"></div>
       <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
+      <div style=background-image:url(./foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
     </html>`,
   },
   {
@@ -132,6 +148,13 @@ test.each([
         ./foo/baz/
       ">/foo/baz/</a>
       <a href='./foo/baz/'>/foo/baz/</a>
+      <a href=./foo/baz/>/foo/baz/</a>
+      <a href=./foo/baz/ class=foo>/foo/baz/</a>
+      <a
+        href=./foo/baz/
+      >
+        /foo/baz/
+      </a>
       <a foohref="/foo/baz/">/foo/baz/</a>
       <a href="https://example.com">example</a>
       <a href="//example.com">example</a>
@@ -155,6 +178,7 @@ test.each([
       <div style="background-image: url('./assets/images/foo.jpg');"></div>
       <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
+      <div style=background-image:url(./foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
     </html>`,
   },
   {
@@ -180,6 +204,13 @@ test.each([
         ../foo/baz/
       ">/foo/baz/</a>
       <a href='../foo/baz/'>/foo/baz/</a>
+      <a href=../foo/baz/>/foo/baz/</a>
+      <a href=../foo/baz/ class=foo>/foo/baz/</a>
+      <a
+        href=../foo/baz/
+      >
+        /foo/baz/
+      </a>
       <a foohref="/foo/baz/">/foo/baz/</a>
       <a href="https://example.com">example</a>
       <a href="//example.com">example</a>
@@ -203,6 +234,7 @@ test.each([
       <div style="background-image: url('../assets/images/foo.jpg');"></div>
       <div style="background-image: url(../foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
+      <div style=background-image:url(../foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
     </html>`,
   },
   {
@@ -228,6 +260,13 @@ test.each([
         ./baz/
       ">/foo/baz/</a>
       <a href='./baz/'>/foo/baz/</a>
+      <a href=./baz/>/foo/baz/</a>
+      <a href=./baz/ class=foo>/foo/baz/</a>
+      <a
+        href=./baz/
+      >
+        /foo/baz/
+      </a>
       <a foohref="/foo/baz/">/foo/baz/</a>
       <a href="https://example.com">example</a>
       <a href="//example.com">example</a>
@@ -251,6 +290,7 @@ test.each([
       <div style="background-image: url('/assets/images/foo.jpg');"></div>
       <div style="background-image: url(./assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
+      <div style=background-image:url(./assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
     </html>`,
   },
   {
@@ -276,6 +316,13 @@ test.each([
         ./baz/
       ">/foo/baz/</a>
       <a href='./baz/'>/foo/baz/</a>
+      <a href=./baz/>/foo/baz/</a>
+      <a href=./baz/ class=foo>/foo/baz/</a>
+      <a
+        href=./baz/
+      >
+        /foo/baz/
+      </a>
       <a foohref="/foo/baz/">/foo/baz/</a>
       <a href="https://example.com">example</a>
       <a href="//example.com">example</a>
@@ -299,6 +346,7 @@ test.each([
       <div style="background-image: url('/assets/images/foo.jpg');"></div>
       <div style="background-image: url(./assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
+      <div style=background-image:url(./assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
     </html>`,
   },
   {
@@ -324,6 +372,13 @@ test.each([
         ../baz/
       ">/foo/baz/</a>
       <a href='../baz/'>/foo/baz/</a>
+      <a href=../baz/>/foo/baz/</a>
+      <a href=../baz/ class=foo>/foo/baz/</a>
+      <a
+        href=../baz/
+      >
+        /foo/baz/
+      </a>
       <a foohref="/foo/baz/">/foo/baz/</a>
       <a href="https://example.com">example</a>
       <a href="//example.com">example</a>
@@ -347,6 +402,7 @@ test.each([
       <div style="background-image: url('/assets/images/foo.jpg');"></div>
       <div style="background-image: url(../assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
+      <div style=background-image:url(../assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
     </html>`,
   },
 ])('Replaced HTML', ({ expected, ...args }) => {
