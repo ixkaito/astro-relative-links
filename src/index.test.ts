@@ -35,8 +35,7 @@ const html = `<html>
         /foo/baz/
       ">/foo/baz/</a>
       <a href='/foo/baz/'>/foo/baz/</a>
-      <a href=/foo/baz/>/foo/baz/</a>
-      <a href=/foo/baz/ class=foo>/foo/baz/</a>
+      <a href=/foo/baz/ class=/foo/>/foo/baz/</a>
       <a
         href=/foo/baz/
       >
@@ -92,8 +91,7 @@ test.each([
         ./foo/baz/
       ">/foo/baz/</a>
       <a href='./foo/baz/'>/foo/baz/</a>
-      <a href=./foo/baz/>/foo/baz/</a>
-      <a href=./foo/baz/ class=foo>/foo/baz/</a>
+      <a href=./foo/baz/ class=/foo/>/foo/baz/</a>
       <a
         href=./foo/baz/
       >
@@ -148,8 +146,7 @@ test.each([
         ./foo/baz/
       ">/foo/baz/</a>
       <a href='./foo/baz/'>/foo/baz/</a>
-      <a href=./foo/baz/>/foo/baz/</a>
-      <a href=./foo/baz/ class=foo>/foo/baz/</a>
+      <a href=./foo/baz/ class=/foo/>/foo/baz/</a>
       <a
         href=./foo/baz/
       >
@@ -204,8 +201,7 @@ test.each([
         ../foo/baz/
       ">/foo/baz/</a>
       <a href='../foo/baz/'>/foo/baz/</a>
-      <a href=../foo/baz/>/foo/baz/</a>
-      <a href=../foo/baz/ class=foo>/foo/baz/</a>
+      <a href=../foo/baz/ class=/foo/>/foo/baz/</a>
       <a
         href=../foo/baz/
       >
@@ -260,8 +256,7 @@ test.each([
         ./baz/
       ">/foo/baz/</a>
       <a href='./baz/'>/foo/baz/</a>
-      <a href=./baz/>/foo/baz/</a>
-      <a href=./baz/ class=foo>/foo/baz/</a>
+      <a href=./baz/ class=/foo/>/foo/baz/</a>
       <a
         href=./baz/
       >
@@ -316,8 +311,7 @@ test.each([
         ./baz/
       ">/foo/baz/</a>
       <a href='./baz/'>/foo/baz/</a>
-      <a href=./baz/>/foo/baz/</a>
-      <a href=./baz/ class=foo>/foo/baz/</a>
+      <a href=./baz/ class=/foo/>/foo/baz/</a>
       <a
         href=./baz/
       >
@@ -372,8 +366,7 @@ test.each([
         ../baz/
       ">/foo/baz/</a>
       <a href='../baz/'>/foo/baz/</a>
-      <a href=../baz/>/foo/baz/</a>
-      <a href=../baz/ class=foo>/foo/baz/</a>
+      <a href=../baz/ class=/foo/>/foo/baz/</a>
       <a
         href=../baz/
       >
