@@ -65,6 +65,10 @@ const html = `<html>
       <div style="background-image: url(/foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(/foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
+      <astro-island component-url="/foo/_astro/script.js" renderer-url="/foo/_astro/script.js"></astro-island>
+      <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+      <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
     </html>`;
 
 test.each([
@@ -121,6 +125,10 @@ test.each([
       <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
+      <astro-island component-url="./foo/_astro/script.js" renderer-url="./foo/_astro/script.js"></astro-island>
+      <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+      <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
     </html>`,
   },
   {
@@ -176,6 +184,10 @@ test.each([
       <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
+      <astro-island component-url="./foo/_astro/script.js" renderer-url="./foo/_astro/script.js"></astro-island>
+      <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+      <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
     </html>`,
   },
   {
@@ -231,6 +243,10 @@ test.each([
       <div style="background-image: url(../foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(../foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <astro-island component-url="../_astro/script.js" renderer-url="../_astro/script.js"></astro-island>
+      <astro-island component-url="../foo/_astro/script.js" renderer-url="../foo/_astro/script.js"></astro-island>
+      <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+      <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
     </html>`,
   },
   {
@@ -286,6 +302,10 @@ test.each([
       <div style="background-image: url(./assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
+      <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
+      <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+      <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
     </html>`,
   },
   {
@@ -341,6 +361,10 @@ test.each([
       <div style="background-image: url(./assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
+      <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
+      <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+      <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
     </html>`,
   },
   {
@@ -396,6 +420,10 @@ test.each([
       <div style="background-image: url(../assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(../assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
+      <astro-island component-url="../_astro/script.js" renderer-url="../_astro/script.js"></astro-island>
+      <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+      <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
     </html>`,
   },
 ])('Replaced HTML', ({ expected, ...args }) => {
