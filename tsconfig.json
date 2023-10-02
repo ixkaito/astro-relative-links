@@ -1,13 +1,17 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "strict": true,
     "declaration": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node16",
+    "emitDeclarationOnly": true,
     "esModuleInterop": true,
-    "allowJs": true,
-    "module": "ESNext",
-    "target": "ESNext",
-    "outDir": "./dist"
+    "allowJs": false,
+    "module": "Node16",
+    "target": "ES2022",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": false
   },
   "include": ["src"],
   "exclude": ["src/**/*.test.ts"]
