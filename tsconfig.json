@@ -4,7 +4,6 @@
     "strict": true,
     "declaration": true,
     "moduleResolution": "Node16",
-    "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "allowJs": false,
     "module": "Node16",
