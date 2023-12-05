@@ -93,7 +93,7 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
 
         try {
           // HTML
-          globSync(`${dir.pathname}**/*.html`).forEach((filePath) => {
+          globSync(`${outDirPath}**/*.html`).forEach((filePath) => {
             writeFileSync(
               filePath,
               replaceHTML({
@@ -107,7 +107,7 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
           });
 
           // CSS
-          globSync(`${dir.pathname}**/*.css`).forEach((filePath) => {
+          globSync(`${outDirPath}**/*.css`).forEach((filePath) => {
             writeFileSync(
               filePath,
               replaceCSS({
