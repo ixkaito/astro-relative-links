@@ -65,6 +65,22 @@ const html = `<html>
       <div style="background-image: url(/foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(/foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <video poster="/assets/images/foo.jpg">
+        <source src="/assets/videos/foo.mp4" type="video/mp4">
+        <source src="/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="/foo/assets/images/foo.jpg">
+        <source src="/foo/assets/videos/foo.mp4" type="video/mp4">
+        <source src="/foo/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="assets/images/foo.jpg">
+        <source src="assets/videos/foo.mp4" type="video/mp4">
+        <source src="assets/videos/foo.webm" type="video/webm">
+      </video>
       <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
       <astro-island component-url="/foo/_astro/script.js" renderer-url="/foo/_astro/script.js"></astro-island>
       <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
@@ -125,6 +141,22 @@ test.each([
       <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./foo/assets/images/foo.jpg">
+        <source src="./foo/assets/videos/foo.mp4" type="video/mp4">
+        <source src="./foo/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="assets/images/foo.jpg">
+        <source src="assets/videos/foo.mp4" type="video/mp4">
+        <source src="assets/videos/foo.webm" type="video/webm">
+      </video>
       <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
       <astro-island component-url="./foo/_astro/script.js" renderer-url="./foo/_astro/script.js"></astro-island>
       <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
@@ -184,6 +216,22 @@ test.each([
       <div style="background-image: url(./foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./foo/assets/images/foo.jpg">
+        <source src="./foo/assets/videos/foo.mp4" type="video/mp4">
+        <source src="./foo/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="assets/images/foo.jpg">
+        <source src="assets/videos/foo.mp4" type="video/mp4">
+        <source src="assets/videos/foo.webm" type="video/webm">
+      </video>
       <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
       <astro-island component-url="./foo/_astro/script.js" renderer-url="./foo/_astro/script.js"></astro-island>
       <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
@@ -243,6 +291,22 @@ test.each([
       <div style="background-image: url(../foo/assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(../foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <video poster="../assets/images/foo.jpg">
+        <source src="../assets/videos/foo.mp4" type="video/mp4">
+        <source src="../assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="../foo/assets/images/foo.jpg">
+        <source src="../foo/assets/videos/foo.mp4" type="video/mp4">
+        <source src="../foo/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="assets/images/foo.jpg">
+        <source src="assets/videos/foo.mp4" type="video/mp4">
+        <source src="assets/videos/foo.webm" type="video/webm">
+      </video>
       <astro-island component-url="../_astro/script.js" renderer-url="../_astro/script.js"></astro-island>
       <astro-island component-url="../foo/_astro/script.js" renderer-url="../foo/_astro/script.js"></astro-island>
       <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
@@ -302,6 +366,22 @@ test.each([
       <div style="background-image: url(./assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <video poster="/assets/images/foo.jpg">
+        <source src="/assets/videos/foo.mp4" type="video/mp4">
+        <source src="/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="assets/images/foo.jpg">
+        <source src="assets/videos/foo.mp4" type="video/mp4">
+        <source src="assets/videos/foo.webm" type="video/webm">
+      </video>
       <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
       <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
       <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
@@ -361,6 +441,22 @@ test.each([
       <div style="background-image: url(./assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(./assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <video poster="/assets/images/foo.jpg">
+        <source src="/assets/videos/foo.mp4" type="video/mp4">
+        <source src="/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="assets/images/foo.jpg">
+        <source src="assets/videos/foo.mp4" type="video/mp4">
+        <source src="assets/videos/foo.webm" type="video/webm">
+      </video>
       <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
       <astro-island component-url="./_astro/script.js" renderer-url="./_astro/script.js"></astro-island>
       <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
@@ -420,6 +516,22 @@ test.each([
       <div style="background-image: url(../assets/images/foo.jpg);"></div>
       <div style="">background-image: url(/assets/images/foo.jpg);</div>
       <div style=background-image:url(../assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+      <video poster="/assets/images/foo.jpg">
+        <source src="/assets/videos/foo.mp4" type="video/mp4">
+        <source src="/assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="../assets/images/foo.jpg">
+        <source src="../assets/videos/foo.mp4" type="video/mp4">
+        <source src="../assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="./assets/images/foo.jpg">
+        <source src="./assets/videos/foo.mp4" type="video/mp4">
+        <source src="./assets/videos/foo.webm" type="video/webm">
+      </video>
+      <video poster="assets/images/foo.jpg">
+        <source src="assets/videos/foo.mp4" type="video/mp4">
+        <source src="assets/videos/foo.webm" type="video/webm">
+      </video>
       <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
       <astro-island component-url="../_astro/script.js" renderer-url="../_astro/script.js"></astro-island>
       <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
