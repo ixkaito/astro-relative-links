@@ -93,21 +93,23 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
 
         try {
           // HTML
-          globSync(`${outDirPath}**/*.html`).forEach((filePath) => {
-            writeFileSync(
-              filePath,
-              replaceHTML({
-                outDirPath,
+          globSync(`${decodeURI(dir.pathname)}**/*.html`).forEach(
+            (filePath) => {
+              writeFileSync(
                 filePath,
-                base,
-                html: readFileSync(filePath, 'utf8'),
-              }),
-              'utf8'
-            );
-          });
+                replaceHTML({
+                  outDirPath,
+                  filePath,
+                  base,
+                  html: readFileSync(filePath, 'utf8'),
+                }),
+                'utf8'
+              );
+            }
+          );
 
           // CSS
-          globSync(`${outDirPath}**/*.css`).forEach((filePath) => {
+          globSync(`${decodeURI(dir.pathname)}**/*.css`).forEach((filePath) => {
             writeFileSync(
               filePath,
               replaceCSS({
