@@ -14,6 +14,12 @@ export function leadingTrailingSlash(base?: string) {
   return base?.replace(/^\/*([^\/]+)(.*)([^\/]+)\/*$/, '/$1$2$3/') || '/';
 }
 
+const pattern = {
+  htmlAttr: `(href|src(set)?|poster|component-url|renderer-url)=["']?([^"']*,)?`,
+  styleAttr: `style=("[^"]*|'[^']*|[^\\s]*)`,
+  styleUrl: `url\\(\\s*?["']?`,
+};
+
 /**
  * Replace absolute paths in HTML files with relative paths.
  *
@@ -35,8 +41,14 @@ export function replaceHTML({
   base: string;
   html: string;
 }) {
-  const pattern = new RegExp(
-    `(?<=<[^>]+\\s((href|src(set)?|poster|component-url|renderer-url)=["']?([^"']*,)?|style=("[^"]*|'[^']*|[^\\s]*)url\\(\\s*?["']?)\\s*?)${base}(?!\/)`,
+  const { htmlAttr, styleAttr, styleUrl } = pattern;
+  const regex = new RegExp(
+    `(?<=<[^>]+\\s(` +
+      htmlAttr +
+      `|` +
+      styleAttr +
+      styleUrl +
+      `)\\s*?)${base}(?!\/)`,
     'gm'
   );
 
@@ -46,7 +58,7 @@ export function replaceHTML({
       .split(path.sep)
       .join(path.posix.sep) || '.';
 
-  return html.replace(pattern, `${relativePath}/`);
+  return html.replace(regex, `${relativePath}/`);
 }
 
 /**
@@ -70,7 +82,8 @@ export function replaceCSS({
   base: string;
   css: string;
 }) {
-  const pattern = new RegExp(`(?<=url\\(\\s*?["']?\\s*?)${base}(?!\/)`, 'gm');
+  const { styleUrl } = pattern;
+  const regex = new RegExp(`(?<=` + styleUrl + `\\s*?)${base}(?!\/)`, 'gm');
 
   const relativePath =
     path
@@ -78,7 +91,7 @@ export function replaceCSS({
       .split(path.sep)
       .join(path.posix.sep) || '.';
 
-  return css.replace(pattern, `${relativePath}/`);
+  return css.replace(regex, `${relativePath}/`);
 }
 
 function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
