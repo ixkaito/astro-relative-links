@@ -42,13 +42,11 @@ export function replaceHTML({
   html: string;
 }) {
   const { htmlAttr, styleAttr, styleUrl } = pattern;
+  const htmlPattern =
+    `<[^>]+\\s(` + htmlAttr + `|` + styleAttr + styleUrl + `)`;
+  const cssPattern = `<style>[^<]*` + styleUrl;
   const regex = new RegExp(
-    `(?<=<[^>]+\\s(` +
-      htmlAttr +
-      `|` +
-      styleAttr +
-      styleUrl +
-      `)\\s*?)${base}(?!\/)`,
+    `(?<=(` + htmlPattern + `|` + cssPattern + `)\\s*?)${base}(?!\/)`,
     'gm'
   );
 
