@@ -1,0 +1,107 @@
+<html>
+  <link href="/_astro/style.css">
+  <link href="/foo/_astro/style.css">
+  <link href="https://example.com/style.css">
+  <link href="//example.com/style.css">
+  <script src="/_astro/script.js"></script>
+  <script src="/foo/_astro/script.js"></script>
+  <script src="https://example.com/script.js"></script>
+  <script src="//example.com/script.js"></script>
+  <style>
+    :root {
+      --foo:
+        url(/assets/images/foo.jpg)
+        url("/assets/images/foo.jpg")
+        url('/assets/images/foo.jpg')
+        url(/foo/assets/images/foo.jpg)
+        url("/foo/assets/images/foo.jpg")
+        url('/foo/assets/images/foo.jpg')
+        url(
+          /assets/images/foo.jpg
+        )
+        url(
+          "/assets/images/foo.jpg"
+        )
+        url(" /assets/images/foo.jpg ")
+        url(
+          '/assets/images/foo.jpg'
+        )
+        url(' /assets/images/foo.jpg ')
+        url(
+          /foo/assets/images/foo.jpg
+        )
+        url(
+          "/foo/assets/images/foo.jpg"
+        )
+        url(" /foo/assets/images/foo.jpg ")
+        url(
+          '/foo/assets/images/foo.jpg'
+        )
+        url(' /foo/assets/images/foo.jpg ')
+        url(./assets/images/foo.jpg)
+        url(https://example.com/foo.jpg)
+        url(//example.com/foo.jpg)
+        /assets/images/foo.jpg
+        /foo/assets/images/foo.jpg;
+    }
+  </style>
+  <a href="/">/</a>
+  <a href="/foo/">/foo/</a>
+  <a href="/foobar/">/foobar/</a>
+  <a href="/foo/bar/">/foo/bar/</a>
+  <a href="/foo/baz/">/foo/baz/</a>
+  <a href="
+    /foo/baz/
+  ">/foo/baz/</a>
+  <a href='/foo/baz/'>/foo/baz/</a>
+  <a href=/foo/baz/ class=/foo/>/foo/baz/</a>
+  <a
+    href=/foo/baz/
+  >
+    /foo/baz/
+  </a>
+  <a foohref="/foo/baz/">/foo/baz/</a>
+  <a href="https://example.com">example</a>
+  <a href="//example.com">example</a>
+  <a href="../">parent</a>
+  <a href="foo">foo</a>
+  <img
+    src="/assets/images/foo.jpg"
+    srcset="/assets/images/foo.jpg 1x,
+            /assets/images/foo@2x.jpg 2x"
+    alt=""
+  />
+  <img
+    src="/foo/assets/images/foo.jpg"
+    srcset="/foo/assets/images/foo.jpg 1x,
+            /foo/assets/images/foo@2x.jpg 2x"
+    alt=""
+  />
+  <img src="./assets/images/foo.jpg" alt="" />
+  <img src="assets/images/foo.jpg" alt="" />
+  <p>&lt;a href="/foo/bar/"&gt;bar&lt;/a&gt;</p>
+  <div style="background-image: url('/assets/images/foo.jpg');"></div>
+  <div style="background-image: url(/foo/assets/images/foo.jpg);"></div>
+  <div style="">background-image: url(/assets/images/foo.jpg);</div>
+  <div style=background-image:url(/foo/assets/images/foo.jpg) class=bg-[url(/assets/images/foo.jpg)]></div>
+  <video poster="/assets/images/foo.jpg">
+    <source src="/assets/videos/foo.mp4" type="video/mp4">
+    <source src="/assets/videos/foo.webm" type="video/webm">
+  </video>
+  <video poster="/foo/assets/images/foo.jpg">
+    <source src="/foo/assets/videos/foo.mp4" type="video/mp4">
+    <source src="/foo/assets/videos/foo.webm" type="video/webm">
+  </video>
+  <video poster="./assets/images/foo.jpg">
+    <source src="./assets/videos/foo.mp4" type="video/mp4">
+    <source src="./assets/videos/foo.webm" type="video/webm">
+  </video>
+  <video poster="assets/images/foo.jpg">
+    <source src="assets/videos/foo.mp4" type="video/mp4">
+    <source src="assets/videos/foo.webm" type="video/webm">
+  </video>
+  <astro-island component-url="/_astro/script.js" renderer-url="/_astro/script.js"></astro-island>
+  <astro-island component-url="/foo/_astro/script.js" renderer-url="/foo/_astro/script.js"></astro-island>
+  <astro-island component-url="https://example.com/script.js" renderer-url="https://example.com/script.js"></astro-island>
+  <astro-island component-url="//example.com/script.js" renderer-url="//example.com/script.js"></astro-island>
+</html>
