@@ -1,0 +1,36 @@
+:root {
+  --foo:
+    url(../assets/images/foo.jpg)
+    url("../assets/images/foo.jpg")
+    url('../assets/images/foo.jpg')
+    url(../foo/assets/images/foo.jpg)
+    url("../foo/assets/images/foo.jpg")
+    url('../foo/assets/images/foo.jpg')
+    url(
+      ../assets/images/foo.jpg
+    )
+    url(
+      "../assets/images/foo.jpg"
+    )
+    url(" ../assets/images/foo.jpg ")
+    url(
+      '../assets/images/foo.jpg'
+    )
+    url(' ../assets/images/foo.jpg ')
+    url(
+      ../foo/assets/images/foo.jpg
+    )
+    url(
+      "../foo/assets/images/foo.jpg"
+    )
+    url(" ../foo/assets/images/foo.jpg ")
+    url(
+      '../foo/assets/images/foo.jpg'
+    )
+    url(' ../foo/assets/images/foo.jpg ')
+    url(./assets/images/foo.jpg)
+    url(https://example.com/foo.jpg)
+    url(//example.com/foo.jpg)
+    /assets/images/foo.jpg
+    /foo/assets/images/foo.jpg;
+}
