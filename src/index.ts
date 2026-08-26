@@ -92,6 +92,48 @@ export function replaceCSS({
   return css.replace(regex, `${relativePath}/`);
 }
 
+type RenderBuiltUrl = NonNullable<
+  NonNullable<NonNullable<AstroConfig['vite']>['experimental']>['renderBuiltUrl']
+>;
+
+/**
+ * Make Vite emit the URLs it builds for JavaScript relative to the importing
+ * chunk instead of `base + path`.
+ *
+ * HTML and CSS are made relative after the build (`replaceHTML`/`replaceCSS`),
+ * but paths used from JavaScript cannot be replaced that way: Vite bakes the
+ * base into a runtime helper (`assetsURL = dep => base + dep`) and keeps the
+ * paths themselves in a separate array, so there is no absolute path in the
+ * output to match. Those paths are therefore left pointing at the server root —
+ * `modulepreload` links of dynamically imported chunks and asset URLs built with
+ * `new URL(..., import.meta.url)`. A build deployed under a sub-path requests
+ * them from the wrong place, and where the server answers a miss with an HTML
+ * error page the browser reports `Failed to load module script: Expected a
+ * JavaScript-or-Wasm module script but the server responded with a MIME type of
+ * "text/html"`.
+ *
+ * `{ relative: true }` switches Vite to `new URL(dep, importerUrl)` and makes it
+ * emit chunk-relative dependency paths. `html` and `css` are left to Vite's
+ * default so the post-build replacement keeps working, and a `renderBuiltUrl` of
+ * the user's own always wins — this only fills in the case it leaves open.
+ *
+ * @param {RenderBuiltUrl} [userRenderBuiltUrl] - `renderBuiltUrl` already set in the Astro config.
+ * @returns {RenderBuiltUrl} - `renderBuiltUrl` to pass to Vite.
+ */
+export function relativeJsUrls(
+  userRenderBuiltUrl?: RenderBuiltUrl
+): RenderBuiltUrl {
+  return (filename, context) => {
+    const userResult = userRenderBuiltUrl?.(filename, context);
+
+    if (userResult !== undefined) {
+      return userResult;
+    }
+
+    return context.hostType === 'js' ? { relative: true } : undefined;
+  };
+}
+
 function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
   const base = leadingTrailingSlash(config?.base);
 
@@ -146,6 +188,15 @@ export default function (): AstroIntegration {
     hooks: {
       'astro:config:setup': ({ config, updateConfig }) => {
         updateConfig({
+          vite: {
+            experimental: {
+              // Paths used from JavaScript are not covered by the post-build
+              // replacement — see `relativeJsUrls`.
+              renderBuiltUrl: relativeJsUrls(
+                config?.vite?.experimental?.renderBuiltUrl
+              ),
+            },
+          },
           // Pass the Astro config to the `astro:build:done` hook
           integrations: [relativeLinks({ config })],
         });
