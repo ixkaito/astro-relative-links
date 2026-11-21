@@ -1,6 +1,5 @@
 import type { AstroIntegration, AstroConfig } from 'astro';
-import { writeFileSync, readFileSync } from 'fs';
-import { globSync } from 'glob';
+import { globSync, writeFileSync, readFileSync } from 'node:fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -101,26 +100,30 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
       'astro:build:done': async ({ dir }) => {
         // Use fileURLToPath to get a valid, cross-platform absolute path string
         const outDirPath = fileURLToPath(dir);
+        const globOptions = { cwd: outDirPath, withFileTypes: true } as const;
 
         try {
           // HTML
-          globSync(`${decodeURI(dir.pathname)}**/*.html`).forEach(
-            (filePath) => {
-              writeFileSync(
+          for (const entry of globSync('**/*.html', globOptions)) {
+            // Glob can match directories named like HTML files, which cannot be read as files.
+            if (entry.isDirectory()) continue;
+            const filePath = path.join(entry.parentPath, entry.name);
+            writeFileSync(
+              filePath,
+              replaceHTML({
+                outDirPath,
                 filePath,
-                replaceHTML({
-                  outDirPath,
-                  filePath,
-                  base,
-                  html: readFileSync(filePath, 'utf8'),
-                }),
-                'utf8'
-              );
-            }
-          );
+                base,
+                html: readFileSync(filePath, 'utf8'),
+              }),
+              'utf8'
+            );
+          }
 
           // CSS
-          globSync(`${decodeURI(dir.pathname)}**/*.css`).forEach((filePath) => {
+          for (const entry of globSync('**/*.css', globOptions)) {
+            if (entry.isDirectory()) continue;
+            const filePath = path.join(entry.parentPath, entry.name);
             writeFileSync(
               filePath,
               replaceCSS({
@@ -131,7 +134,7 @@ function relativeLinks({ config }: { config?: AstroConfig }): AstroIntegration {
               }),
               'utf8'
             );
-          });
+          }
         } catch (error) {
           console.log(error);
         }
